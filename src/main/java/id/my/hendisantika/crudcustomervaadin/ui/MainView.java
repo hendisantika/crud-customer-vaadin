@@ -1,9 +1,16 @@
 package id.my.hendisantika.crudcustomervaadin.ui;
 
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.router.Route;
 import id.my.hendisantika.crudcustomervaadin.entity.Customer;
 import id.my.hendisantika.crudcustomervaadin.repository.CustomerRepository;
-
-import java.awt.*;
+import org.springframework.util.StringUtils;
 
 /**
  * Created by IntelliJ IDEA.
@@ -64,4 +71,14 @@ public class MainView extends VerticalLayout {
         // Initialize listing
         listCustomers(null);
     }
+
+    // tag::listCustomers[]
+    void listCustomers(String filterText) {
+        if (StringUtils.hasText(filterText)) {
+            grid.setItems(repo.findByLastNameStartsWithIgnoreCase(filterText));
+        } else {
+            grid.setItems(repo.findAll());
+        }
+    }
+    // end::listCustomers[]
 }
