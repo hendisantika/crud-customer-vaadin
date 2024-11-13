@@ -79,4 +79,9 @@ public class CustomerEditor extends VerticalLayout implements KeyNotifier {
         repository.delete(customer);
         changeHandler.onChange();
     }
+
+    void save() {
+        repository.save(customer);
+        changeHandler.onChange();
+    }
 }
