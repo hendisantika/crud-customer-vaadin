@@ -1,6 +1,9 @@
 package id.my.hendisantika.crudcustomervaadin.repository;
 
 import id.my.hendisantika.crudcustomervaadin.entity.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
