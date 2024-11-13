@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.3.5"
     id("io.spring.dependency-management") version "1.1.6"
+    id("com.vaadin") version "24.4.4"
 }
 
 group = "id.my.hendisantika"
@@ -12,6 +13,8 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
+
+extra["vaadinVersion"] = "24.5.4"
 
 configurations {
     compileOnly {
@@ -24,7 +27,9 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    runtimeOnly("com.h2database:h2")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
@@ -32,6 +37,13 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
+
+dependencyManagement {
+    imports {
+        mavenBom("com.vaadin:vaadin-bom:${property("vaadinVersion")}")
+    }
+}
+
 
 tasks.withType<Test> {
     useJUnitPlatform()
