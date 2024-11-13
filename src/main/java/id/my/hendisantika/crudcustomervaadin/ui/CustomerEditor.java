@@ -88,4 +88,31 @@ public class CustomerEditor extends VerticalLayout implements KeyNotifier {
     public interface ChangeHandler {
         void onChange();
     }
+
+    public final void editCustomer(Customer c) {
+        if (c == null) {
+            setVisible(false);
+            return;
+        }
+        final boolean persisted = c.getId() != null;
+        if (persisted) {
+            // Find fresh entity for editing
+            // In a more complex app, you might want to load
+            // the entity/DTO with lazy loaded relations for editing
+            customer = repository.findById(c.getId()).get();
+        } else {
+            customer = c;
+        }
+        cancel.setVisible(persisted);
+
+        // Bind customer properties to similarly named fields
+        // Could also use annotation or "manual binding" or programmatically
+        // moving values from fields to entities before saving
+        binder.setBean(customer);
+
+        setVisible(true);
+
+        // Focus first name initially
+        firstName.focus();
+    }
 }
