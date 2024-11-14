@@ -83,4 +83,9 @@ public class MainViewTests {
                 .extracting("firstName", "lastName")
                 .containsExactly("Josh", "Long");
     }
+
+    @Test
+    public void shouldInitializeWithInvisibleEditor() {
+        then(this.editor.isVisible()).isFalse();
+    }
 }
