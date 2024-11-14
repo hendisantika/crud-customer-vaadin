@@ -4,11 +4,14 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.server.VaadinRequest;
 import id.my.hendisantika.crudcustomervaadin.entity.Customer;
 import id.my.hendisantika.crudcustomervaadin.repository.CustomerRepository;
+import jakarta.annotation.PostConstruct;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,7 @@ import static org.assertj.core.api.BDDAssertions.then;
  * To change this template use File | Settings | File Templates.
  */
 @SpringBootTest(classes = MainViewTests.Config.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class MainViewTests {
+class MainViewTests {
 
     @Autowired
     CustomerRepository repository;
@@ -102,5 +105,22 @@ public class MainViewTests {
         this.editor.firstName.setValue(firstName);
         this.editor.lastName.setValue(lastName);
         editor.editCustomer(new Customer(firstName, lastName));
+    }
+
+    @Configuration
+    @EnableAutoConfiguration(exclude = com.vaadin.flow.spring.SpringBootAutoConfiguration.class)
+    static class Config {
+
+        @Autowired
+        CustomerRepository repository;
+
+        @PostConstruct
+        public void initializeData() {
+            this.repository.save(new Customer("Jack", "Bauer"));
+            this.repository.save(new Customer("Chloe", "O'Brian"));
+            this.repository.save(new Customer("Kim", "Bauer"));
+            this.repository.save(new Customer("David", "Palmer"));
+            this.repository.save(new Customer("Michelle", "Dessler"));
+        }
     }
 }
