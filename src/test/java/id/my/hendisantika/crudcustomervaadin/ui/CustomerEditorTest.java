@@ -23,15 +23,17 @@ import static org.mockito.BDDMockito.then;
  * To change this template use File | Settings | File Templates.
  */
 @SpringBootTest
-public class CustomerEditorTests {
+class CustomerEditorTests {
 
-    private static final String FIRST_NAME = "Marcin";
-    private static final String LAST_NAME = "Grzejszczak";
+    private static final String FIRST_NAME = "Monkey";
+    private static final String LAST_NAME = "D. Luffy";
 
     @Mock
     CustomerRepository customerRepository;
+
     @InjectMocks
     CustomerEditor editor;
+
     @Mock
     CustomerEditor.ChangeHandler changeHandler;
 
