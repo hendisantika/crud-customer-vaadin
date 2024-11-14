@@ -1,5 +1,6 @@
 package id.my.hendisantika.crudcustomervaadin.ui;
 
+import id.my.hendisantika.crudcustomervaadin.entity.Customer;
 import id.my.hendisantika.crudcustomervaadin.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,5 +58,9 @@ public class CustomerEditorTests {
         editor.delete();
 
         then(this.customerRepository).should().delete(argThat(customerMatchesEditorFields()));
+    }
+
+    private void emptyCustomerWasSetToForm() {
+        this.editor.editCustomer(new Customer());
     }
 }
