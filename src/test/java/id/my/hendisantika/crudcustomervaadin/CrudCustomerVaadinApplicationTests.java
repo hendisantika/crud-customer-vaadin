@@ -18,4 +18,8 @@ class CrudCustomerVaadinApplicationTests {
         then(this.repository.count()).isEqualTo(5);
     }
 
+    @Test
+    public void shouldFindYujiCustomers() {
+        then(this.repository.findByLastNameStartsWithIgnoreCase("Yuji")).hasSize(1);
+    }
 }
