@@ -88,4 +88,12 @@ public class MainViewTests {
     public void shouldInitializeWithInvisibleEditor() {
         then(this.editor.isVisible()).isFalse();
     }
+
+    @Test
+    public void shouldMakeEditorVisible() {
+        Customer first = getCustomersInGrid().get(0);
+        this.mainView.grid.select(first);
+
+        then(this.editor.isVisible()).isTrue();
+    }
 }
