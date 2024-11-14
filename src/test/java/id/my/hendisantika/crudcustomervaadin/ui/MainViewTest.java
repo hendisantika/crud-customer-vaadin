@@ -55,4 +55,20 @@ public class MainViewTests {
         ListDataProvider<Customer> ldp = (ListDataProvider) mainView.grid.getDataProvider();
         return new ArrayList<>(ldp.getItems());
     }
+
+    @Test
+    public void shouldFillOutTheGridWithNewData() {
+        int initialCustomerCount = (int) this.repository.count();
+
+        customerDataWasFilled(editor, "Monkey", "D. Luffy");
+
+        this.editor.save();
+
+        then(getCustomersInGrid()).hasSize(initialCustomerCount + 1);
+
+        then(getCustomersInGrid().get(getCustomersInGrid().size() - 1))
+                .extracting("firstName", "lastName")
+                .containsExactly("Monkey", "D. Luffy");
+
+    }
 }
