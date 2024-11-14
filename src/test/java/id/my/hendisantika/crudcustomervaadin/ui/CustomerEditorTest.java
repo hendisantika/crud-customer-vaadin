@@ -63,4 +63,8 @@ public class CustomerEditorTests {
     private void emptyCustomerWasSetToForm() {
         this.editor.editCustomer(new Customer());
     }
+
+    private void customerDataWasFilled() {
+        this.editor.editCustomer(new Customer(FIRST_NAME, LAST_NAME));
+    }
 }
