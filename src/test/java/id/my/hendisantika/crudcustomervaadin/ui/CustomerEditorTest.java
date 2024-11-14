@@ -49,4 +49,13 @@ public class CustomerEditorTests {
 
         then(this.customerRepository).should().save(argThat(customerMatchesEditorFields()));
     }
+
+    @Test
+    public void shouldDeleteCustomerFromRepoWhenEditorDeleteClicked() {
+        customerDataWasFilled();
+
+        editor.delete();
+
+        then(this.customerRepository).should().delete(argThat(customerMatchesEditorFields()));
+    }
 }
