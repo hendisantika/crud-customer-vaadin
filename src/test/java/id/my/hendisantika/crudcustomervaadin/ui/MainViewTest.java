@@ -1,12 +1,17 @@
 package id.my.hendisantika.crudcustomervaadin.ui;
 
+import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.server.VaadinRequest;
+import id.my.hendisantika.crudcustomervaadin.entity.Customer;
 import id.my.hendisantika.crudcustomervaadin.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -44,5 +49,10 @@ public class MainViewTests {
 
         then(mainView.grid.getColumns()).hasSize(3);
         then(getCustomersInGrid()).hasSize(customerCount);
+    }
+
+    private List<Customer> getCustomersInGrid() {
+        ListDataProvider<Customer> ldp = (ListDataProvider) mainView.grid.getDataProvider();
+        return new ArrayList<>(ldp.getItems());
     }
 }
