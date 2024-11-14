@@ -4,6 +4,7 @@ import id.my.hendisantika.crudcustomervaadin.entity.Customer;
 import id.my.hendisantika.crudcustomervaadin.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -66,5 +67,9 @@ public class CustomerEditorTests {
 
     private void customerDataWasFilled() {
         this.editor.editCustomer(new Customer(FIRST_NAME, LAST_NAME));
+    }
+
+    private ArgumentMatcher<Customer> customerMatchesEditorFields() {
+        return customer -> FIRST_NAME.equals(customer.getFirstName()) && LAST_NAME.equals(customer.getLastName());
     }
 }
