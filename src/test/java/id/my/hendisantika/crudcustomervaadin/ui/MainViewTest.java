@@ -96,4 +96,11 @@ public class MainViewTests {
 
         then(this.editor.isVisible()).isTrue();
     }
+
+    private void customerDataWasFilled(CustomerEditor editor, String firstName,
+                                       String lastName) {
+        this.editor.firstName.setValue(firstName);
+        this.editor.lastName.setValue(lastName);
+        editor.editCustomer(new Customer(firstName, lastName));
+    }
 }
