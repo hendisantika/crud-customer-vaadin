@@ -2,9 +2,13 @@ package id.my.hendisantika.crudcustomervaadin.ui;
 
 import id.my.hendisantika.crudcustomervaadin.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.BDDMockito.then;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,4 +38,15 @@ public class CustomerEditorTests {
         editor.setChangeHandler(changeHandler);
     }
 
+    @Test
+    public void shouldStoreCustomerInRepoWhenEditorSaveClicked() {
+        emptyCustomerWasSetToForm();
+
+        this.editor.firstName.setValue(FIRST_NAME);
+        this.editor.lastName.setValue(LAST_NAME);
+
+        this.editor.save();
+
+        then(this.customerRepository).should().save(argThat(customerMatchesEditorFields()));
+    }
 }
