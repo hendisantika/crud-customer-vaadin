@@ -3,9 +3,12 @@ package id.my.hendisantika.crudcustomervaadin.ui;
 import com.vaadin.flow.server.VaadinRequest;
 import id.my.hendisantika.crudcustomervaadin.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.assertj.core.api.BDDAssertions.then;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,4 +38,11 @@ public class MainViewTests {
         this.mainView = new MainView(this.repository, editor);
     }
 
+    @Test
+    public void shouldInitializeTheGridWithCustomerRepositoryData() {
+        int customerCount = (int) this.repository.count();
+
+        then(mainView.grid.getColumns()).hasSize(3);
+        then(getCustomersInGrid()).hasSize(customerCount);
+    }
 }
