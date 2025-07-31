@@ -2,7 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.5.4"
     id("io.spring.dependency-management") version "1.1.7"
-    id("com.vaadin") version "24.8.4"
+    id("com.vaadin") version "24.8.5"
 }
 
 group = "id.my.hendisantika"
